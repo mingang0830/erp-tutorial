@@ -11,9 +11,9 @@ for i in lst:
         search_id.append(i)
 user_info = search_id[0].split("] ")
 del user_info[0]
-name_score = "".join(user_info).split(":")
-print(name_score[0])
-print(name_score[1])
+nickname_score = "".join(user_info).split(":")
+print(nickname_score[0])
+print(nickname_score[1])
 
 
 
