@@ -64,7 +64,7 @@ while True:
 
         #  엔터치면 메뉴로 돌아가기
         back_menu = input()
-        if input_menu == "":
+        if back_menu == "":
             continue
 
     elif input_menu == "3":
@@ -77,7 +77,7 @@ while True:
 
         #  엔터치면 메뉴로 돌아가기
         back_menu = input()
-        if input_menu == "":
+        if back_menu == "":
             continue
 
     elif input_menu == "4":
@@ -92,7 +92,7 @@ while True:
 
         #  엔터치면 메뉴로 돌아가기
         back_menu = input()
-        if input_menu == "":
+        if back_menu == "":
             continue
 
 
