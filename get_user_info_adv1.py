@@ -14,19 +14,33 @@ while True:
     if input_menu == "1":
         print("= id 로 검색 =")
         input_user_id = input('찾을 id 입력 : ')
-        if input_user_id == "":  # 엔터치면 메뉴로 돌아가기
-            continue
-        else:
+
+        user_info = []
+        for i in lst:
+            user_info.append(i.split(" ", 1))
+        del user_info[-1]
+
+        user_id = []
+        for i in range(len(user_info)):
+            user_id.append(user_info[i][0])  # [id]만 있는 리스트
+
+        if "[%s]" % input_user_id in user_id:  # id 유무 검사
             search_id = []
             for i in lst:
                 if input_user_id in i:
-                    search_id.append(i)
-            user_info = search_id[0].split(" ", 1)
-            del user_info[0]
-            nickname_score = "".join(user_info).split(":")
-            print(nickname_score[0])
-            print(nickname_score[1])
+                    search_id.append(i)  # 입력한 id가 있는 요소를 search_id에 추가
+            user_info = search_id[0].split(" ", 1)  # ['[id]', '닉네임:스코어']
+            del user_info[0]  # id 부분 삭제
+            nickname_score = "".join(user_info).split(":")  # ['닉네임', '스코어']
+            print(nickname_score[0])  # 닉네임
+            print(nickname_score[1])  # 스코어
             break
+
+        elif input_user_id == "":  # 엔터치면 메뉴로 돌아가기
+            continue
+
+        else:
+            print("잘못된 id 입력입니다.")
 
     elif input_menu == "2":
         print("= score 높은 10명 =")
