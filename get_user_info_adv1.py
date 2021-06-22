@@ -13,11 +13,6 @@ nick_score = []  # ['닉네임', '스코어'], ...]
 for i in range(len(user_info)):
     nick_score.append(user_info[i][1].split(":"))
 
-score = []  # 스코어만 있는 리스트
-for i in lst:
-    score.append(i.split(":")[-1])
-del score[-1]  # 왜 리스트 마지막에 ''가 있는건지 모르겠음... 삭제해주기
-
 
 while True:
     print("1. id로 검색")
@@ -56,6 +51,11 @@ while True:
     elif input_menu == "2":
         print("= score 높은 10명 =")
 
+        score = []  # 스코어만 있는 리스트
+        for i in lst:
+            score.append(i.split(":")[-1])
+        del score[-1]  # 왜 리스트 마지막에 ''가 있는건지 모르겠음... 삭제해주기
+
         score = list(map(str, sorted(list(map(int, score)), reverse=True)))[0:10]  # 상위 10개의 스코어
         high_rank = [nick_score[nick_score.index(j)] for i in score for j in nick_score if i in j]
 
@@ -70,6 +70,11 @@ while True:
     elif input_menu == "3":
         print("= score 낮은 10명 =")
 
+        score = []  # 스코어만 있는 리스트
+        for i in lst:
+            score.append(i.split(":")[-1])
+        del score[-1]
+
         score = list(map(str, sorted(list(map(int, score)))))[0:10]  # 하위 10개의 스코어
         low_rank = [nick_score[nick_score.index(j)] for i in score for j in nick_score if i in j]
         for i in low_rank[0:10]:
@@ -82,7 +87,7 @@ while True:
 
     elif input_menu == "4":
         print("= 모든 user 의 score 평균 = ")
-        score = []  # 다른 메뉴 돌고오면  score 값 변경돼서 재정의
+        score = []
         for i in lst:
             score.append(i.split(":")[-1])
         del score[-1]
