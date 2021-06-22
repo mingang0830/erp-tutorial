@@ -64,6 +64,8 @@ while True:
             print("%s : %s" % (high_rank[high_rank.index(i)][0], high_rank[high_rank.index(i)][1]))
 
         #  엔터치면 메뉴로 돌아가기
+        print()
+        print("엔터를 누르면 처음 메뉴로 돌아갑니다.")
         back_menu = input()
         if back_menu == "":
             continue
@@ -83,6 +85,8 @@ while True:
             print("%s : %s" % (low_rank[low_rank.index(i)][0], low_rank[low_rank.index(i)][1]))
 
         #  엔터치면 메뉴로 돌아가기
+        print()
+        print("엔터를 누르면 처음 메뉴로 돌아갑니다.")
         back_menu = input()
         if back_menu == "":
             continue
@@ -98,6 +102,8 @@ while True:
         print(round(score_average, 2))  # 소수점 셋째자리에서 반올림
 
         #  엔터치면 메뉴로 돌아가기
+        print()
+        print("엔터를 누르면 처음 메뉴로 돌아갑니다.")
         back_menu = input()
         if back_menu == "":
             continue
