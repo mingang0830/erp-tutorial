@@ -57,11 +57,10 @@ while True:
             score.append(i.split(":")[-1])
         del score[-1]  # 왜 리스트 마지막에 ''가 있는건지 모르겠음... 삭제해주기
 
-        score = list(map(str, sorted(list(map(int, score)), reverse=True)))[0:int(num)]  # 상위 10개의 스코어
-        high_rank = [nick_score[nick_score.index(j)] for i in score for j in nick_score if i in j]
-
+        score = list(map(str, sorted(list(map(int, score)), reverse=True)))[0:int(num)]  # 상위 num 개의 스코어
+        high_rank = [" : ".join(nick_score[nick_score.index(j)]) for i in score for j in nick_score if i in j]
         for i in high_rank[0:int(num)]:
-            print("%s : %s" % (high_rank[high_rank.index(i)][0], high_rank[high_rank.index(i)][1]))
+            print(i)
 
         #  엔터치면 메뉴로 돌아가기
         print()
@@ -79,10 +78,11 @@ while True:
             score.append(i.split(":")[-1])
         del score[-1]
 
-        score = list(map(str, sorted(list(map(int, score)))))[0:int(num)]  # 하위 10개의 스코어
-        low_rank = [nick_score[nick_score.index(j)] for i in score for j in nick_score if i in j]
+        score = list(map(str, sorted(list(map(int, score)))))[0:int(num)]  # 하위 num 개의 스코어
+        low_rank = [" : ".join(nick_score[nick_score.index(j)]) for i in score for j in nick_score if i in j]
+        print(low_rank)
         for i in low_rank[0:int(num)]:
-            print("%s : %s" % (low_rank[low_rank.index(i)][0], low_rank[low_rank.index(i)][1]))
+            print(i)
 
         #  엔터치면 메뉴로 돌아가기
         print()
