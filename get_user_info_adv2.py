@@ -1,4 +1,10 @@
 import requests
+import os
+
+
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 url = "https://gist.githubusercontent.com/tempKDW/38c088036e5d12f1683b2d7d6a941ce6/raw/4afd2ffc19c063bc298e63da0908ffd60e045649/gistfile1.txt"
 html = requests.get(url)
@@ -59,14 +65,31 @@ while True:
 
         score = list(map(str, sorted(list(map(int, score)), reverse=True)))[0:int(num)]  # 상위 num 개의 스코어
         high_rank = [" : ".join(nick_score[nick_score.index(j)]) for i in score for j in nick_score if i in j]
+        inner = []
+        result = []
         for i in high_rank[0:int(num)]:
-            print(i)
+            inner.append(i)
+            if len(inner) == 5:
+                result.append(inner)
+                inner = []
+        result.append(inner)
+
+        for i in result:
+            print()
+            print("엔터를 치면 5명씩 표시합니다")
+            input()
+            os.system('cls')
+            for j in i:
+                print(j)
+
+        print()
+        print("출력 완료")
 
         #  엔터치면 메뉴로 돌아가기
         print()
-        print("엔터를 누르면 처음 메뉴로 돌아갑니다.")
-        back_menu = input()
+        back_menu = input('엔터를 치면 메뉴로 돌아갑니다')
         if back_menu == "":
+            print()
             continue
 
     elif input_menu == "3":
@@ -78,17 +101,34 @@ while True:
             score.append(i.split(":")[-1])
         del score[-1]
 
-        score = list(map(str, sorted(list(map(int, score)))))[0:int(num)]  # 하위 num 개의 스코어
+        score = list(map(str, sorted(list(map(int, score)))))[0:int(num)]  # 하위 10개의 스코어
         low_rank = [" : ".join(nick_score[nick_score.index(j)]) for i in score for j in nick_score if i in j]
-        print(low_rank)
+
+        inner = []
+        result = []
         for i in low_rank[0:int(num)]:
-            print(i)
+            inner.append(i)
+            if len(inner) == 5:
+                result.append(inner)
+                inner = []
+        result.append(inner)
+
+        for i in result:
+            print()
+            print("엔터를 치면 5명씩 표시합니다")
+            input()
+            os.system('cls')
+            for j in i:
+                print(j)
+
+        print()
+        print("출력 완료")
 
         #  엔터치면 메뉴로 돌아가기
         print()
-        print("엔터를 누르면 처음 메뉴로 돌아갑니다.")
-        back_menu = input()
+        back_menu = input('엔터를 치면 메뉴로 돌아갑니다')
         if back_menu == "":
+            print()
             continue
 
     elif input_menu == "4":
@@ -103,9 +143,9 @@ while True:
 
         #  엔터치면 메뉴로 돌아가기
         print()
-        print("엔터를 누르면 처음 메뉴로 돌아갑니다.")
-        back_menu = input()
+        back_menu = input('엔터를 치면 메뉴로 돌아갑니다')
         if back_menu == "":
+            print()
             continue
 
 
