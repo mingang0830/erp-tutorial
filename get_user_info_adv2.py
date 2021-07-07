@@ -1,6 +1,6 @@
+import re
 import requests
 import os
-import get_user_info
 
 
 def cls():
@@ -10,6 +10,24 @@ def cls():
 url = "https://gist.githubusercontent.com/tempKDW/38c088036e5d12f1683b2d7d6a941ce6/raw/4afd2ffc19c063bc298e63da0908ffd60e045649/gistfile1.txt"
 html = requests.get(url)
 lst = html.text.split("\n")
+
+
+print("유저 타입을 선택해주세요.\n1. 숫자 유저\n2. 글자 유저")
+user_type = input(">")
+if user_type == "1":
+    num_user_info = []
+    for i in range(len(lst)):
+        if type(re.match(r"\[(\d+)\]", lst[i])) == re.Match:
+            num_user_info.append(lst[i])
+    lst = num_user_info
+
+elif user_type == '2':
+    str_user_info = []
+    for i in range(len(lst)):
+        if type(re.match(r"\[(\d+)\]", lst[i])) != re.Match:
+            str_user_info.append(lst[i])
+    lst = str_user_info
+
 
 user_info = []  # [['[id]','닉네임:스코어'], ...]
 for i in lst:
@@ -30,19 +48,30 @@ while True:
 
     if input_menu == "1":
         print("= id 로 검색 =")
-        try:
-            user_id = input('찾을 id 입력 : ')
-            if user_id == "":  # 엔터치면 메뉴로 돌아가기
-                continue
+        input_user_id = input('찾을 id 입력 : ')
 
-            users = get_user_info.get_data(url, user_id)
+        user_id = []
+        for i in range(len(user_info)):
+            user_id.append(user_info[i][0])  # [id]만 있는 리스트
 
-            user = users.get(user_id)
-
-            print(f'{user.nickname}\n{user.score}')
+        if "[%s]" % input_user_id in user_id:  # id 유무 검사
+            search_id = []
+            for i in lst:
+                if input_user_id in i:
+                    search_id.append(i)  # 입력한 id가 있는 요소를 search_id에 추가
+            user_info = search_id[0].split(" ", 1)  # ['[id]', '닉네임:스코어']
+            del user_info[0]  # id 부분 삭제
+            nickname_score = "".join(user_info).split(":")  # ['닉네임', '스코어']
+            print(nickname_score)
+            print(nickname_score[0])  # 닉네임
+            print(nickname_score[1])  # 스코어
             break
-        except AttributeError:
-            print("잘못된 입력입니다.\n")
+
+        elif input_user_id == "":  # 엔터치면 메뉴로 돌아가기
+            continue
+
+        else:
+            print("잘못된 id 입력입니다.")
 
     elif input_menu == "2":
         print("= score 높은 순서로 검색 =")
