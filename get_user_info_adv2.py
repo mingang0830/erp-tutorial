@@ -1,3 +1,4 @@
+import re
 import requests
 import os
 
@@ -9,6 +10,24 @@ def cls():
 url = "https://gist.githubusercontent.com/tempKDW/38c088036e5d12f1683b2d7d6a941ce6/raw/4afd2ffc19c063bc298e63da0908ffd60e045649/gistfile1.txt"
 html = requests.get(url)
 lst = html.text.split("\n")
+
+
+print("유저 타입을 선택해주세요.\n1. 숫자 유저\n2. 글자 유저")
+user_type = input(">")
+if user_type == "1":
+    num_user_info = []
+    for i in range(len(lst)):
+        if type(re.match(r"\[(\d+)\]", lst[i])) == re.Match:
+            num_user_info.append(lst[i])
+    lst = num_user_info
+
+elif user_type == '2':
+    str_user_info = []
+    for i in range(len(lst)):
+        if type(re.match(r"\[(\d+)\]", lst[i])) != re.Match:
+            str_user_info.append(lst[i])
+    lst = str_user_info
+
 
 user_info = []  # [['[id]','닉네임:스코어'], ...]
 for i in lst:
@@ -147,5 +166,3 @@ while True:
         if back_menu == "":
             print()
             continue
-
-
